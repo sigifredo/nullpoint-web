@@ -1,0 +1,30 @@
+html, body, section, .page-container
+{
+    height: 100%;
+    width: 100%;
+}
+
+.red
+{
+    background-color: #faa;
+}
+
+.green
+{
+    background-color: green;
+}
+
+.blue
+{
+    background-color: blue;
+}
+
+.gray
+{
+    background-color: gray;
+}
+
+.yellow
+{
+    background-color: yellow;
+}
