@@ -9,45 +9,53 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
-            $(function() {
-              $('a[href*=#]:not([href=#])').click(function() {
-                if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-                  var target = $(this.hash);
-                  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-                  if (target.length) {
-                    $('html,body').animate({
-                      scrollTop: target.offset().top
-                    }, 500);
-                    return false;
-                  }
-                }
-              });
+            var transitable = true;
+            $(function()
+            {
+                $('a[href*=#]:not([href=#])').click(function()
+                {
+                    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname)
+                    {
+                        var target = $(this.hash);
+                        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                        if (target.length)
+                        {
+                            $('html,body').animate({
+                                scrollTop: target.offset().top
+                            }, 500);
+                            return false;
+                        }
+                    }
+                });
             });
 
-$(window).bind('mousewheel DOMMouseScroll', function (e) {
-console.log('a');
-var orientation = e.originalEvent.wheelDelta || e.originalEvent.detail,
-    up = false;
+            $(window).bind('mousewheel DOMMouseScroll', function (e) {
+                if (transitable)
+                {
+                    transitable = false;
+                    console.log('a');
+                    var orientation = e.originalEvent.wheelDelta || e.originalEvent.detail,
+                        up = false;
 
-if (e.originalEvent.wheelDelta)
-{
-    if (orientation > 0)
-        up = true;
-}
-else if (orientation < 0)
-    up = true;
+                    if (e.originalEvent.wheelDelta)
+                    {
+                        if (orientation > 0)
+                            up = true;
+                    }
+                    else if (orientation < 0)
+                        up = true;
 
-if (up)
-    up = $(window).scrollTop() - $('#home').height();
-else
-    up = $(window).scrollTop() + $('#home').height();
+                    if (up)
+                        up = $(window).scrollTop() - $('#home').height();
+                    else
+                        up = $(window).scrollTop() + $('#home').height();
 
-$('html,body').animate({
-  scrollTop: up
-}, 500);
-
-return false;
-});
+                    $('html,body').animate({
+                        scrollTop: up
+                    }, 500, 'swing', function () { transitable = true; });
+                }
+                return false;
+            });
         </script>
         <title>NullPoint page test</title>
     </head>
