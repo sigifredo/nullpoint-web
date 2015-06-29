@@ -29,6 +29,7 @@ html, body, section, .page-container
     background-color: yellow;
 }
 
+/*
 @media (min-width: 768px)
 {
     body
@@ -36,3 +37,4 @@ html, body, section, .page-container
         overflow: hidden;
     }
 }
+*/

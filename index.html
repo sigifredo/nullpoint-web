@@ -6,7 +6,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
         <link rel="icon" type="image/png" href="imgs/favicon.png">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
             $(function() {
@@ -23,6 +23,31 @@
                 }
               });
             });
+
+$(window).bind('mousewheel DOMMouseScroll', function (e) {
+console.log('a');
+var orientation = e.originalEvent.wheelDelta || e.originalEvent.detail,
+    up = false;
+
+if (e.originalEvent.wheelDelta)
+{
+    if (orientation > 0)
+        up = true;
+}
+else if (orientation < 0)
+    up = true;
+
+if (up)
+    up = $(window).scrollTop() - $('#home').height();
+else
+    up = $(window).scrollTop() + $('#home').height();
+
+$('html,body').animate({
+  scrollTop: up
+}, 500);
+
+return false;
+});
         </script>
         <title>NullPoint page test</title>
     </head>
