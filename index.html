@@ -9,7 +9,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
-            var transitable = true;
+            var transitable = true, lastItem = 0;
+
             $(function()
             {
                 $('a[href*=#]:not([href=#])').click(function()
@@ -56,6 +57,17 @@
                 }
                 return false;
             });
+
+            $(document).scroll(function (e)
+            {
+                var p = Math.round($(window).scrollTop() / $('#home').height());
+                if (lastItem != p)
+                {
+                    $('#item-' + p).addClass('active');
+                    $('#item-' + lastItem).removeClass('active');
+                    lastItem = p;
+                }
+            });
         </script>
         <title>NullPoint page test</title>
     </head>
@@ -73,9 +85,9 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li id="item-0" class="active"><a href="#home">Home</a></li>
+                    <li id="item-1"><a href="#about">About</a></li>
+                    <li id="item-2"><a href="#contact">Contact</a></li>
                 </ul>
                 </div>
             </div>
