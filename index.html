@@ -7,9 +7,28 @@
         <link href="css/style.css" rel="stylesheet">
         <link rel="icon" type="image/png" href="imgs/favicon.png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
-            var transitable = true, lastItem = 0;
+            var transitable = true, lastItem = 0, bgColors = ['#fff', '#0f0', '#00f'];
+
+            function scrollCheck ()
+            {
+                if (transitable)
+                {
+                    var p = Math.round($(window).scrollTop() / $('#home').height());
+                    if (lastItem != p)
+                    {
+                        $('#item-' + p).addClass('active');
+                        $('#item-' + lastItem).removeClass('active');
+                        lastItem = p;
+
+                        $('body').animate({
+                            backgroundColor: bgColors[p]
+                        }, 500);
+                    }
+                }
+            }
 
             $(function()
             {
@@ -21,9 +40,10 @@
                         target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
                         if (target.length)
                         {
+                            transitable = false;
                             $('html,body').animate({
                                 scrollTop: target.offset().top
-                            }, 500);
+                            }, 500, function () { transitable = true; scrollCheck(); });
                             return false;
                         }
                     }
@@ -58,16 +78,7 @@
                 return false;
             });
 
-            $(document).scroll(function (e)
-            {
-                var p = Math.round($(window).scrollTop() / $('#home').height());
-                if (lastItem != p)
-                {
-                    $('#item-' + p).addClass('active');
-                    $('#item-' + lastItem).removeClass('active');
-                    lastItem = p;
-                }
-            });
+            $(document).scroll(scrollCheck);
         </script>
         <title>NullPoint page test</title>
     </head>

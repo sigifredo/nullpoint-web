@@ -4,6 +4,12 @@ html, body, section, .page-container
     width: 100%;
 }
 
+section
+{
+    border: solid 1px;
+}
+
+/*
 .red
 {
     background-color: #faa;
